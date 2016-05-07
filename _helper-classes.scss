@@ -1,0 +1,25 @@
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+// image replacement
+.ir {
+  @include ir;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.cf {
+  @include clearfix;
+}

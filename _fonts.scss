@@ -1,0 +1,68 @@
+// rem fallback
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+@function rem($multiplier) {
+  $font-size: 10px;
+  @return $multiplier * $font-size;
+}
+
+// font smoothing
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*--------------------------------
+
+  Font face
+
+  example:
+
+  @include font-face('Clarendon', 'clarendon-webfont');
+  @include font-face('Clarendon', 'clarendon-webfont', $w-bold, italic);
+
+*/
+
+@mixin font-face($name, $filename, $svgfontid, $weight: normal, $style: normal) {
+  @font-face {
+    font-family: $name;
+    src: url('../static/fonts/#{$filename}.eot');
+    src: url('../static/fonts/#{$filename}.eot?#iefix') format('embedded-opentype'),
+         url('../static/fonts/#{$filename}.woff') format('woff'),
+         url('../static/fonts/#{$filename}.ttf') format('truetype'),
+         url('../static/fonts/#{$filename}.svg##{$svgfontid}') format('svg');
+    font-style: $style;
+    font-weight: $weight;
+  }
+  @media screen and (-webkit-min-device-pixel-ratio: 0){
+        @font-face {
+            font-family: $name;
+            src: url('../static/fonts/#{$filename}.svg##{$svgfontid}') format('svg');
+        }
+    }
+}
+
+
+
+/*--------------------------------
+
+  Font families
+
+*/
+
+@mixin font-roboto($weight: false, $size: false, $lh: false, $colour: false) {
+  font-family: 'Roboto', 'Comic Sans MS', Arial, sans-serif;
+
+  @if $weight { font-weight: $weight; }
+  @if $size { font-size: $size; }
+  @if $lh { line-height: $lh; }
+  @if $colour { color: $colour; }
+}

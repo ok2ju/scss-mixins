@@ -1,0 +1,37 @@
+// Image replacement
+
+@mixin ir {
+  display: block;
+  background: {
+    repeat: no-repeat;
+    position: 0 0;
+  }
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+}
+
+/*--------------------------------
+  Typography
+  Text image replacement, with responsive ratio
+  HTML:
+  <h1 class="element">
+    <span>Text to replace</span>
+  </h1>
+  example:
+  .element {
+    @include typography(200, 50, 'hello-world');
+  }
+*/
+
+@mixin typography($w, $h, $file, $type: png, $overflow: hidden) {
+  @include responsive-ratio($w, $h, true);
+  position: relative;
+  max-width: ( $w / 10 ) * 1rem;
+  background: url('/assets/img/typography/#{$file}.#{$type}') 50% 50% no-repeat;
+  background-size: contain;
+
+  span {
+    @include hide-text(true, $overflow: $overflow);
+  }
+}
